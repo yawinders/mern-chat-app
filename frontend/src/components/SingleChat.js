@@ -12,11 +12,10 @@ import lookup, { io } from 'socket.io-client';
 import Lottie from 'react-lottie';
 import animationData from '../animations/typing.json'
 
-const ENDPOINT = "http://localhost:5000"
+const ENDPOINT = "http://localhost:5000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+var socket, selectedChatCompare;
 
-let selectedChatCompare;
-
-const socket = io(ENDPOINT, { transports: ['websocket'] });
+// socket = io(ENDPOINT, { transports: ['websocket'] });
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
@@ -42,6 +41,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
 
     useEffect(() => {
+        socket = io(ENDPOINT, { transports: ['websocket'] });
         socket.on('connect', () => {
             console.log('Connected to server:');
         });
